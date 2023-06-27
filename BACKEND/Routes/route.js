@@ -1,18 +1,11 @@
 import express from "express";
-import Product from "../model/ProductSchema.js";
-
+import statisticController from "../DataController/statisticController.js";
+import tranjaction from "../DataController/tranjaction.js";
+import barChartController from "../DataController/barChartController.js";
 const router = express.Router();
-router.get("/transactions", async (req, res) => {
-    let page = Number(req.query.page) || 1;
-    let limit = Number(req.query.limit) || 10;
-    Product.paginate({}, { page, limit })
-        .then(response => {
-            res.json(response);
-        }).catch(err=>{
-        res.json({message:err})
-    })
-    
-});
+router.get("/transactions", tranjaction);
+router.get("/statistics", statisticController)
+router.get("/bar-chart/:month", barChartController)
 
 
 export default router;
