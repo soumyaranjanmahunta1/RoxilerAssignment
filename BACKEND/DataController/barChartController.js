@@ -4,32 +4,31 @@ const barChartController = async (req, res) => {
   try {
     let { month } = req.query;
        let numonth = 0;
-       if (month == "january") {
+       if (month == "January") {
          numonth = 1;
-       } else if (month == "february") {
+       } else if (month == "February") {
          numonth = 2;
-       } else if (month == "march") {
+       } else if (month == "March") {
          numonth = 3;
-       } else if (month == "april") {
+       } else if (month == "April") {
          numonth = 4;
-       } else if (month == "may") {
+       } else if (month == "May") {
          numonth = 5;
-       } else if (month == "june") {
+       } else if (month == "June") {
          numonth = 6;
-       } else if (month == "july") {
+       } else if (month == "July") {
          numonth = 7;
-       } else if (month == "august") {
+       } else if (month == "August") {
          numonth = 8;
-       } else if (month == "september") {
+       } else if (month == "September") {
          numonth = 9;
-       } else if (month == "october") {
+       } else if (month == "October") {
          numonth = 10;
-       } else if (month == "november") {
+       } else if (month == "November") {
          numonth = 11;
-       } else if (month == "december") {
+       } else if (month == "December") {
          numonth = 12;
        }
-    console.log(typeof month);
     if (numonth < 10) {
       numonth = `0${numonth}`;
     }
