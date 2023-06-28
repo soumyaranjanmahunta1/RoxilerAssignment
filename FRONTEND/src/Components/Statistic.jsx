@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 
-const Statistic = () => {
-  const [month, setMonth] = useState("march");
+const Statistic = ({ month, setMonth }) => {
+  // const [month, setMonth] = useState("march");
   const [staticdata, setData] = useState({});
   const [totalamount, settotalamount] = useState(1000);
   useEffect(() => {
@@ -23,31 +23,10 @@ const Statistic = () => {
       console.log(error);
     }
   };
-
-  const changeMonth = (e) => {
-    setMonth(e.target.value);
-  };
   return (
     <div style={{ background: "#EDF7F7" }}>
       <div style={{ display: "flex", justifyContent: "center" }}>
-        <h1>Statistics-</h1>&nbsp;&nbsp;&nbsp;&nbsp;
-        <select
-          onChange={changeMonth}
-          style={{ height: "50px", background: "#FFFFFF", marginTop: "16px" }}
-        >
-          <option value="march">March</option>
-          <option value="january">January</option>
-          <option value="february">February</option>
-          <option value="april">April</option>
-          <option value="may">May</option>
-          <option value="june">June</option>
-          <option value="july">July</option>
-          <option value="august">August</option>
-          <option value="september">September</option>
-          <option value="october">October</option>
-          <option value="november">November</option>
-          <option value="december">December</option>
-        </select>
+        <h1>Statistics- {month.toUpperCase()}</h1>&nbsp;&nbsp;&nbsp;&nbsp;
       </div>
       <div style={{ display: "grid", justifyContent: "center" }}>
         <div

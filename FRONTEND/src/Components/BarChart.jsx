@@ -2,10 +2,10 @@ import axios from "axios";
 import React from "react";
 import { useEffect, useState, useRef } from "react";
 import Chart from "chart.js/auto";
-export default function BarChart() {
+export default function BarChart({ month, setMonth }) {
   const [barChartData, setBarChartData] = useState([]);
   const chartRef = useRef(null);
-  const [month, setmonth] = useState(3);
+  // const [month, setmonth] = useState("march");
   useEffect(() => {
     fetchData();
   }, [month]);
@@ -13,7 +13,7 @@ export default function BarChart() {
   const fetchData = async () => {
     try {
       const response = await axios.get(
-        `http://localhost:8000/bar-chart/${month}`
+        `http://localhost:8000/barChart?month=${month}`
       );
       setBarChartData(response.data);
     } catch (error) {
@@ -65,31 +65,10 @@ export default function BarChart() {
       options: chartOptions,
     });
   };
-  const changeMonth = (e) => {
-    setmonth(e.target.value);
-  };
-
   return (
     <div style={{ background: "#EDF7F7", padding: "5px" }}>
       <div style={{ display: "flex", justifyContent: "center" }}>
-        <h1>Bar Chart Status-</h1>&nbsp;&nbsp;&nbsp;&nbsp;
-        <select
-          onChange={changeMonth}
-          style={{ height: "50px", background: "#FFFFFF", marginTop: "16px" }}
-        >
-          <option value={3}>March</option>
-          <option value={1}>January</option>
-          <option value={2}>February</option>
-          <option value={4}>April</option>
-          <option value={5}>May</option>
-          <option value={6}>June</option>
-          <option value={7}>July</option>
-          <option value={8}>August</option>
-          <option value={9}>September</option>
-          <option value={10}>October</option>
-          <option value={11}>November</option>
-          <option value={12}>December</option>
-        </select>
+        <h1>Bar Chart Status- {month.toUpperCase()}</h1>&nbsp;&nbsp;&nbsp;&nbsp;
       </div>
       <div style={{ padding: "30px" }}>
         <canvas id="barChart" />;

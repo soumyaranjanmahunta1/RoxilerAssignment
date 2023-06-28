@@ -1,18 +1,17 @@
 import React from "react";
 import axios from "axios";
 import { useState, useEffect } from "react";
-export default function Transactionlist() {
+export default function Transactionlist({month,setMonth}) {
   const [transactions, setTransactions] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
-
   useEffect(() => {
     fetchTransactions();
   }, [currentPage]);
 
   const fetchTransactions = async () => {
     const response = await axios
-      .get(`http://localhost:8000/transactions?page=${currentPage}&limit=10`)
+      .get(`http://localhost:8000/transactions?month=${"may"}&page=${currentPage}&limit=10`)
       .then((response) => {
         setTransactions(response.data.docs);
         setTotalPages(response.data.totalPages);
@@ -30,6 +29,9 @@ export default function Transactionlist() {
       setCurrentPage(currentPage - 1);
     }
   };
+  const changeMonth = (e) => {
+    setMonth(e.target.value);
+  }
   return (
     <div id="container">
       <div id="Topcontainer">
@@ -41,7 +43,7 @@ export default function Transactionlist() {
             height: "200px",
             display: "flex",
             justifyContent: "center",
-            marginLeft: "500px",
+            marginLeft: "550px",
           }}
         >
           <h2 style={{ padding: "40px", color: "#676767" }}>
@@ -58,19 +60,19 @@ export default function Transactionlist() {
           }}
         >
           <input type="text" placeholder="Search transaction" />
-          <select>
-            <option value="March">March</option>
-            <option value="January">January</option>
-            <option value="February">February</option>
-            <option value="April">April</option>
-            <option value="May">May</option>
-            <option value="June">June</option>
-            <option value="July">July</option>
-            <option value="August">August</option>
-            <option value="September">September</option>
-            <option value="October">October</option>
-            <option value="November">November</option>
-            <option value="December">December</option>
+          <select onChange={changeMonth}>
+            <option value="march">March</option>
+            <option value="january">January</option>
+            <option value="february">February</option>
+            <option value="april">April</option>
+            <option value="may">May</option>
+            <option value="june">June</option>
+            <option value="july">July</option>
+            <option value="august">August</option>
+            <option value="september">September</option>
+            <option value="october">October</option>
+            <option value="november">November</option>
+            <option value="december">December</option>
           </select>
         </div>
       </div>
@@ -123,7 +125,7 @@ export default function Transactionlist() {
         <button onClick={handleNextPage} disabled={currentPage === totalPages}>
           Next
         </button>
-        <h3>Per Page No : {10}</h3>
+        <h3>Per Page : {10}</h3>
       </div>
     </div>
   );
